@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8f9fa;
+  --foreground: #1a365d;
+}
+
+@theme inline {
+  --primary: #002366;
+  --secondary: #c5a059;
+  --tertiary: #1a365d;
+  --neutral: #f8f9fa;
+  --heading-font: var(--font-noto-serif);
+  --body-font: var(--font-manrope);
+
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a365d;
+    --foreground: #f8f9fa;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--body-font);
+}
+
+@layer base {
+  .btn {
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background-color: #003580;
+    color: white;
+  }
+  .btn-success {
+    background-color: #008037;
+    color: white;
+  }
+}
