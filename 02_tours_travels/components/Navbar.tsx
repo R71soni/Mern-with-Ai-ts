@@ -2,12 +2,13 @@
 import { useState } from "react";
 
 import { AnimatePresence, motion } from "motion/react";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CustomNavLinkProps, NavbarLink } from "@/types/NavbarLink";
 import useAuth from "@/hooks/useAuth";
+import { RootState } from "@/redux/store";
 
 const navbarLinks: NavbarLink[] = [
   { title: "Home", path: "/" },
@@ -22,7 +23,7 @@ const navbarLinks: NavbarLink[] = [
 ];
 
 const Navbar = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn,userPrinciple } = useAuth();
 
   return (
     <nav className="bg-(--neutral) shadow-md sticky top-0 z-50">
@@ -37,14 +38,14 @@ const Navbar = () => {
           </span>
         </Link>
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {isLoggedIn ? (
+          {(isLoggedIn && userPrinciple!=null) ? (
             <UserMenu />
           ) : (
             <>
-              <Link href="/login">
+              <Link href="/sign-in">
                 <button className="btn btn-primary ">Login</button>
               </Link>
-              <Link href="/signup">
+              <Link href="/sign-up">
                 <button className="btn btn-success ml-2">Sign up</button>
               </Link>
             </>
@@ -119,7 +120,7 @@ const UserMenu = () => {
         <span className="sr-only">Open user menu</span>
         <Image
           className="w-8 h-8 rounded-full"
-          src={userPrinciple.userImage}
+          src={userPrinciple?.userImage || ""}
           alt="user photo"
           width={32}
           height={32}
@@ -138,10 +139,10 @@ const UserMenu = () => {
           >
             <div className="px-4 py-3">
               <span className="block text-sm text-gray-900 dark:text-white">
-                {userPrinciple.name}
+                {userPrinciple?.name}
               </span>
               <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                {userPrinciple.email}
+                {userPrinciple?.email}
               </span>
             </div>
             <ul className="py-2" aria-labelledby="user-menu-button">
@@ -190,7 +191,7 @@ const UserMenu = () => {
 };
 
 const CustomNavLink = ({ link, index }: CustomNavLinkProps) => {
-  // const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((state:RootState) => state.cart.cartItems);
   const pathname = usePathname();
   return (
     <li key={index}>
@@ -202,7 +203,7 @@ const CustomNavLink = ({ link, index }: CustomNavLinkProps) => {
         }
         aria-current="page"
       >
-        {/* {link.title} {link.path === "/cart" ? <>({cartItems.length})</> : null} */}
+        {link.title} {link.path === "/cart" ? <>({cartItems.length})</> : null}
       </Link>
     </li>
   );

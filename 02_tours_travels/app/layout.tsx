@@ -3,6 +3,8 @@ import { Noto_Serif, Manrope } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Reduxprovider from "@/redux/Reduxprovider";
+import AuthContextWrapper from "@/context/AuthContextWrapper";
 
 const notoSerif = Noto_Serif({
   variable: "--font-noto-serif",
@@ -30,9 +32,13 @@ export default function RootLayout({
       className={`${notoSerif.variable} ${manRope.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {/* <Navbar/>   */}
-        {children}
-        <Footer />
+        <Reduxprovider>
+          <AuthContextWrapper>
+            <Navbar />
+            {children}
+            <Footer />
+          </AuthContextWrapper>
+        </Reduxprovider>
       </body>
     </html>
   );
