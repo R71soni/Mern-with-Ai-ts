@@ -57,7 +57,7 @@ export default function HeroSlider() {
               src={placeObj.imageUrl}
               alt={placeObj.title}
               className="h-90 w-full"
-              loading="lazy"
+              loading="eager"
               height={350}
               width={720}
             />

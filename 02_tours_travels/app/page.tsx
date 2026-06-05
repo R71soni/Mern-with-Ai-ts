@@ -1,8 +1,6 @@
 import LandingPage from "@/pages/LandingPage";
-const HomePage = () => {
-  return (
-    <LandingPage />
-  )
-}
+const HomePage = async () => {
+  return <LandingPage />;
+};
 
-export default HomePage
+export default HomePage;

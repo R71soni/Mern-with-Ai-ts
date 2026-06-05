@@ -2,10 +2,8 @@ type AuthContextType = {
   isLoggedIn: boolean;
   userPrinciple: User | null;
   login: (email: string, password: string) => Promise<boolean>;
-  logout:  () => void;
+  logout: () => void;
 };
-
-
 type Destination = {
   _id: string;
   name: string;
@@ -19,4 +17,45 @@ type Destination = {
   price: number;
   description: string;
 };
-export type { AuthContextType,Destination };
+interface Review {
+  userId?: string;
+  rating?: number;
+  comment?: string;
+  createdAt?: Date;
+}
+interface TouristPlace {
+  _id: string;
+
+  name: string;
+  slug: string;
+  url: string;
+
+  city: string;
+  state: string;
+  country: string;
+  location: string;
+
+  category:
+  | "Historical"
+  | "Wildlife"
+  | "Cultural"
+  | "Urban"
+  | "Romantic"
+  | "Adventure"
+  | "Religious";
+
+  image: string;
+
+  tours: number;
+  price: number;
+
+  description: string;
+
+  rating: number;
+  averageRating: number;
+
+  reviews?: Review[];
+
+  isActive: boolean;
+}
+export type { AuthContextType, Destination, Review, TouristPlace };
