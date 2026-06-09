@@ -1,5 +1,4 @@
 import { TouristPlace } from "@/types/allTypes";
-import { connectDB } from "@/backend/config/mongoose.config";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,8 +9,6 @@ type ResponseProp = {
 };
 const Collections = async () => {
   
-  const conn = await connectDB();
-  console.log("Connected to MongoDB :", conn.connections[0].host);
   const response = await fetch(process.env.PLACES_ENDPOINT!);
   // console.log(response);
   

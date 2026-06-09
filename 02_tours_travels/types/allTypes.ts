@@ -60,7 +60,8 @@ interface TouristPlace {
 }
 type User={
   name?:string,
-  email:string,
-  password?:string
+  email?:string,
+  password?:string,
+  userImage?:string
 }
 export type { User,AuthContextType, Destination, Review, TouristPlace };
