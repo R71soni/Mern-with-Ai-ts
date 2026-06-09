@@ -1,11 +1,8 @@
 export const useAuthService = () => {
-  const API_URL = process.env.NEXT_PUBLIC_USERS_ENDPOINT!;
-  // console.log(API_URL);
   const register = async (formData: User) => {
     try {
-      // console.log("Api url is " + API_URL);
-
-      const response = await fetch(`${API_URL}`, {
+      // Use relative URL to avoid CORS/redirect issues between www and non-www
+      const response = await fetch(`/api/v1/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +30,8 @@ export const useAuthService = () => {
     password: string;
   }) => {
     try {
-      const response = await fetch(`${API_URL}/api/v1/auth/login`, {
+      // Use relative URL for the same reason
+      const response = await fetch(`/api/v1/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
