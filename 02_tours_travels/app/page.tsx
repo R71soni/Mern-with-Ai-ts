@@ -1,4 +1,4 @@
-import LandingPage from "@/pages/LandingPage";
+import LandingPage from "@/views/LandingPage";
 const HomePage = async () => {
   return <LandingPage />;
 };

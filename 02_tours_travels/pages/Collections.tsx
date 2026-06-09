@@ -1,51 +1,6 @@
-import { TouristPlace } from "@/types/allTypes";
-import Image from "next/image";
-import Link from "next/link";
-
-type ResponseProp = {
-  success: boolean;
-  message: string;
-  data: TouristPlace[];
-};
-const Collections = async () => {
-  
-  const response = await fetch(process.env.PLACES_ENDPOINT!);
-  // console.log(response);
-  
-  const { data:touristPlaces }: ResponseProp = await response.json();
-  console.log(touristPlaces);
-  
-  return (
-    <div className="container mx-auto grid grid-cols-4 gap-4 p-6">
-      {touristPlaces?.map((place) => (
-        <PlaceCard key={place._id} place={place} />
-      ))}
-    </div>
-  );
-};
-
-export default Collections;
-
-const PlaceCard = ({ place }: { place: TouristPlace }) => {
-  const { name, city, state, country, image, url, slug } = place;
-  console.log(place._id);
-  
-  return (
-    <Link href={`destination/${slug}`} key={place._id}>
-      <div className="group relative overflow-hidden rounded-2xl transition-shadow hover:shadow-xl">
-        <Image
-          src={image}
-          alt={name}
-          className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-          height={250}
-          width={250}
-        />
-        <div className="glassmorphism absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
-        <span className="absolute bottom-0 left-0 text-white p-6 text-xl">
-          {name}
-          <p>{name === city ? state : `${city}, ${state}`}</p>
-        </span>
-      </div>
-    </Link>
-  );
-};
+// This file is intentionally kept minimal.
+// The actual component has been moved to views/Collections.tsx
+// to avoid conflict with Next.js Pages Router (pages/ is a reserved directory).
+export default function CollectionsStub() {
+  return null;
+}
