@@ -3,9 +3,9 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import useAuthService from "../../services/AuthService";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useAuthService } from "@/services/AuthService";
 
 const schema = z
   .object({
@@ -22,7 +22,7 @@ const schema = z
   });
 
 export default function SignupPage() {
-  // const { register: authRegister } = useAuthService();
+  const { register: authRegister } = useAuthService();
   const navigate = useRouter();
   const {
     register,
@@ -32,20 +32,21 @@ export default function SignupPage() {
     reset,
   } = useForm({ resolver: zodResolver(schema) });
 
-  const submitHandler = async (formData:any) => {
+  const submitHandler = async (formData: User) => {
     try {
       console.log("form submitted :", formData);
-      // const res = await authRegister(formData);
-      // if (res === true) toast.success("Registration successful");
+      const res = await authRegister(formData);
+      if (res._id !== "")
+        toast.success("Registration successful ur id is " + res._id);
       reset();
-      navigate.push("/login");
+      navigate.push("/sign-in");
     } catch (error) {
       toast.error("Registration failed");
       console.log(error);
     }
   };
 
-  console.log("watch confirmPassword :", watch("confirmPassword"));
+  // console.log("watch confirmPassword :", watch("confirmPassword"));
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-950 via-indigo-950 to-slate-900 flex items-center justify-center px-4 py-10">

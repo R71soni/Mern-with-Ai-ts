@@ -477,7 +477,7 @@ export async function GET() {
     await connectDB();
 
     const places = await PlacesDao.find();
-    // console.log(places);
+    console.log(places);
     
     return NextResponse.json({
       message: "Places fetched successfully!",

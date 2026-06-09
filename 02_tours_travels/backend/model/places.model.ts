@@ -4,6 +4,9 @@ import mongoose from "mongoose";
 
 const PlaceSchema = new mongoose.Schema(
     {
+        _id:{
+            type:mongoose.Schema.Types.ObjectId
+        },
         name: {
             type: String,
             required: true,

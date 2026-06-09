@@ -16,7 +16,8 @@ const Collections = async () => {
   // console.log(response);
   
   const { data:touristPlaces }: ResponseProp = await response.json();
-
+  console.log(touristPlaces);
+  
   return (
     <div className="container mx-auto grid grid-cols-4 gap-4 p-6">
       {touristPlaces?.map((place) => (
@@ -30,9 +31,10 @@ export default Collections;
 
 const PlaceCard = ({ place }: { place: TouristPlace }) => {
   const { name, city, state, country, image, url, slug } = place;
-
+  console.log(place._id);
+  
   return (
-    <Link href={`destination/${slug}`}>
+    <Link href={`destination/${slug}`} key={place._id}>
       <div className="group relative overflow-hidden rounded-2xl transition-shadow hover:shadow-xl">
         <Image
           src={image}
