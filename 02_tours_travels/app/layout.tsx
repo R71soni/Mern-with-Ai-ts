@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reduxprovider from "@/redux/Reduxprovider";
 import AuthContextWrapper from "@/context/AuthContextWrapper";
+import { ToastContainer } from "react-toastify";
 
 const notoSerif = Noto_Serif({
   variable: "--font-noto-serif",
@@ -32,6 +33,7 @@ export default function RootLayout({
       className={`${notoSerif.variable} ${manRope.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <ToastContainer/>
         <Reduxprovider>
           <AuthContextWrapper>
             <Navbar />

@@ -36,10 +36,16 @@ export default function SignupPage() {
     try {
       console.log("form submitted :", formData);
       const res = await authRegister(formData);
-      if (res._id !== "")
-        toast.success("Registration successful ur id is " + res._id);
-      reset();
-      navigate.push("/sign-in");
+      if (res.status)
+      {
+        toast.success(res.message || "Registration successful");
+        navigate.push("/sign-in");
+      }
+      else
+      {
+        toast.error(res.message || "Registration failed");
+        reset();
+      }
     } catch (error) {
       toast.error("Registration failed");
       console.log(error);
