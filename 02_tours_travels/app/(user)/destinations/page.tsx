@@ -1,30 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TouristPlace } from "@/types/allTypes";
+import { connectDB } from "@/backend/config/mongoose.config";
+import PlacesDao from "@/backend/model/places.model";
 
-type ResponseProp = {
-    success: boolean;
-    message: string;
-    data: TouristPlace[];
-};
-const Collections = async () => {
-
-    const response = await fetch(process.env.PLACES_ENDPOINT!);
-    // console.log(response);
-
-    const { data: touristPlaces }: ResponseProp = await response.json();
-    console.log(touristPlaces);
+// Server Component — queries MongoDB directly.
+// Never use fetch("http://localhost:...") in server components:
+// the server isn't running during `next build` / Vercel build.
+const DestinationsPage = async () => {
+    await connectDB();
+    const touristPlaces: TouristPlace[] = await PlacesDao.find({ isActive: true }).lean();
 
     return (
         <div className="container mx-auto grid grid-cols-4 gap-4 p-6">
-            {touristPlaces.map((place, i) => (
-                <PlaceCard key={i} place={place} />
+            {touristPlaces.map((place) => (
+                <PlaceCard key={place._id} place={place} />
             ))}
         </div>
     );
 };
 
-export default Collections;
+export default DestinationsPage;
 
 const PlaceCard = ({ place }: { place: TouristPlace }) => {
     const { name, city, state, country, image, url, slug } = place;
