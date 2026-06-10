@@ -58,4 +58,10 @@ interface TouristPlace {
 
   isActive: boolean;
 }
-export type { AuthContextType, Destination, Review, TouristPlace };
+type User={
+  name?:string,
+  email?:string,
+  password?:string,
+  userImage?:string
+}
+export type { User,AuthContextType, Destination, Review, TouristPlace };

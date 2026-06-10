@@ -1,13 +1,6 @@
-import HeroSlider from "@/components/HeroSlider";
-import Collections from "@/pages/Collections";
-
-const LandingPage = () => {
-  return (
-    <div className="">
-      <HeroSlider />
-      <Collections />
-    </div>
-  );
-};
-
-export default LandingPage;
+// This file is intentionally kept minimal.
+// The actual component has been moved to views/LandingPage.tsx
+// to avoid conflict with Next.js Pages Router (pages/ is a reserved directory).
+export default function LandingPageStub() {
+  return null;
+}
